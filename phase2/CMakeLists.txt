@@ -17,9 +17,9 @@ add_subdirectory(stage10_mempool_log)
 add_subdirectory(stage11_reuseport)
 add_subdirectory(stage12_websocket)
 add_subdirectory(stage13_coroutine)
-# add_subdirectory(stage14_http2)
+add_subdirectory(stage14_http2)
 
 # 聚合版进阶服务器
 # add_subdirectory(server)
 
-message(STATUS "  phase2: 进阶阶段（stage8-13 已实现）")
+message(STATUS "  phase2: 进阶阶段（stage8-14 全部实现）")
