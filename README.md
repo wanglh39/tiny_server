@@ -2,7 +2,32 @@
 
 教学项目。在 WSL2 + Linux 下用纯 C 手写一个 Web 服务器，从 raw socket 抓包开始，逐步演进到 epoll + Reactor + 静态文件服务。
 
-## 演进路线
+项目分两个阶段：
+
+- **phase1（基础）**：IO 模型演进 + HTTP 解析 + Reactor + 完整 Web 服务器
+- **phase2（进阶）**：TLS + io_uring + 内存池 + WebSocket + 协程 + HTTP/2
+
+## 目录结构
+
+```
+tiny_server/
+├── phase1/                # 第一阶段：基础
+│   ├── stage0-7/          # 8 个教学阶段
+│   ├── server/            # 聚合版服务器
+│   ├── common/            # 公共模块
+│   ├── docs/              # 教学文档
+│   └── lab/               # 实验脚本
+├── phase2/                # 第二阶段：进阶
+│   ├── stage8-14/         # 7 个进阶阶段（逐步实现）
+│   ├── server/            # 聚合版进阶服务器
+│   ├── common/            # 公共模块（io_ops 抽象层）
+│   ├── docs/              # 教学文档
+│   └── lab/               # 实验脚本
+├── mkdocs.yml             # 文档站配置
+└── CMakeLists.txt         # 顶层构建
+```
+
+## 第一阶段：演进路线
 
 | 阶段 | 目录 | 主题 | 可执行文件 |
 |------|------|------|-----------|
@@ -15,6 +40,18 @@
 | 6 | stage6_reactor | 主从 Reactor | reactor_server |
 | 7 | stage7_webserver | 完整 Web 服务器 | webserver |
 
+## 第二阶段：进阶路线
+
+| 阶段 | 目录 | 主题 |
+|------|------|------|
+| 8 | stage8_tls | TLS/HTTPS |
+| 9 | stage9_io_uring | io_uring 异步 IO |
+| 10 | stage10_mempool_log | 内存池 + 异步日志 |
+| 11 | stage11_reuseport | SO_REUSEPORT 多核 |
+| 12 | stage12_websocket | WebSocket |
+| 13 | stage13_coroutine | 协程 |
+| 14 | stage14_http2 | HTTP/2 |
+
 ## 快速开始
 
 ```bash
@@ -22,7 +59,7 @@
 wsl -d Ubuntu
 
 # 2. 安装环境（首次）
-bash scripts/setup_env.sh
+bash phase1/scripts/setup_env.sh
 
 # 3. 编译
 cd /mnt/c/Users/wlh19/Desktop/webserve
@@ -38,7 +75,7 @@ build/bin/echo_server_epoll_lt 8080  # stage4: epoll LT
 build/bin/echo_server_epoll_et 8080  # stage4: epoll ET
 build/bin/http_server 8080           # stage5: HTTP server
 build/bin/reactor_server 8080 4      # stage6: Reactor（4 线程）
-build/bin/webserver 8080 4 ./www     # stage7: Web 服务器（4 线程）
+build/bin/webserver 8080 4 ./phase1/www  # stage7: Web 服务器
 ```
 
 ## 压测结果（100 并发，2000 请求）
@@ -54,23 +91,16 @@ stage6_reactor(4t)    QPS:  94455    延迟: 1.06 ms
 stage7_webserver      QPS:   2003    延迟: 49.92 ms
 ```
 
-运行压测：`bash lab/benchmark.sh`
+运行压测：`bash phase1/lab/benchmark.sh`
 
 ## 文档
 
+在线文档：https://wanglh39.github.io/tiny_server/
+
 | 文档 | 内容 |
 |------|------|
-| docs/00_byte_order.md | 网络字节序与结构体对齐 |
-| docs/01_raw_sniff.md | stage0：IP/TCP 头部、三次握手 |
-| docs/02_echo_evolution.md | stage1-4：IO 模型演进 |
-| docs/03_http_and_webserver.md | stage5-7：HTTP 解析与 Web 服务器 |
-
-## 实验脚本
-
-```bash
-bash lab/test_echo_servers.sh      # 测试 echo server 功能
-bash lab/test_http_servers.sh      # 测试 HTTP server 功能
-bash lab/benchmark.sh              # 压测对比
-sudo bash lab/tcpdump_handshake.sh # tcpdump 抓三次握手
-bash lab/observe_timewait.sh       # 观察 TIME_WAIT
-```
+| phase1/docs/00_byte_order.md | 网络字节序与结构体对齐 |
+| phase1/docs/01_raw_sniff.md | stage0：IP/TCP 头部、三次握手 |
+| phase1/docs/02_echo_evolution.md | stage1-4：IO 模型演进 |
+| phase1/docs/03_http_and_webserver.md | stage5-7：HTTP 解析与 Web 服务器 |
+| phase1/docs/04_server.md | 聚合版服务器架构 |

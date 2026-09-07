@@ -26,6 +26,12 @@ jobs:
 
       - run: pip install mkdocs-material pymdown-extensions
 
+      - name: 组装文档目录
+        run: |
+          mkdir -p docs
+          cp phase1/docs/*.md docs/ 2>/dev/null || true
+          cp phase2/docs/*.md docs/ 2>/dev/null || true
+
       - run: mkdocs build --strict
 
       - uses: actions/upload-pages-artifact@v3
