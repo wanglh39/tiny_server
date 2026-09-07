@@ -11,8 +11,7 @@
 add_subdirectory(common)
 
 # ---------- 各阶段可执行文件 ----------
-# 按教学顺序逐步添加：
-# add_subdirectory(stage8_tls)
+add_subdirectory(stage8_tls)
 # add_subdirectory(stage9_io_uring)
 # add_subdirectory(stage10_mempool_log)
 # add_subdirectory(stage11_reuseport)
@@ -23,4 +22,4 @@ add_subdirectory(common)
 # 聚合版进阶服务器
 # add_subdirectory(server)
 
-message(STATUS "  phase2: 进阶阶段（待实现）")
+message(STATUS "  phase2: 进阶阶段（stage8_tls 已实现）")

@@ -29,3 +29,6 @@ server.log
 *.tmp
 *.bak
 __pycache__/
+
+# TLS 证书（由 gen_cert.sh 生成）
+phase2/stage8_tls/certs/
