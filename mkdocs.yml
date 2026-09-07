@@ -60,3 +60,4 @@ nav:
   - 第二阶段 - 进阶:
       - TLS/HTTPS: 05_tls_https.md
       - io_uring 异步 IO: 06_io_uring.md
+      - 内存池 + 异步日志: 07_mempool_log.md
