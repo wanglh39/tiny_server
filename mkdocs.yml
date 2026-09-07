@@ -54,14 +54,19 @@ nav:
   - 第一阶段 - 基础:
       - 字节序与结构体对齐: 00_byte_order.md
       - stage0 - raw socket 抓包: 01_raw_sniff.md
-      - stage1-4 - IO 模型演进: 02_echo_evolution.md
-      - stage5-7 - HTTP 与 Web 服务器: 03_http_and_webserver.md
-      - 聚合版服务器: 04_server.md
+      - stage1 - 阻塞 echo server: 02_echo_blocking.md
+      - stage2 - 多进程 fork: 03_echo_fork.md
+      - stage3 - select 多路复用: 04_echo_select.md
+      - stage4 - epoll LT 与 ET: 05_echo_epoll.md
+      - stage5 - HTTP 状态机解析: 06_http_parser.md
+      - stage6 - 主从 Reactor: 07_reactor.md
+      - stage7 - 完整 Web 服务器: 08_webserver.md
+      - 聚合版服务器: 09_server.md
   - 第二阶段 - 进阶:
-      - TLS/HTTPS: 05_tls_https.md
-      - io_uring 异步 IO: 06_io_uring.md
-      - 内存池 + 异步日志: 07_mempool_log.md
-      - SO_REUSEPORT 多核: 08_reuseport.md
-      - WebSocket 协议: 09_websocket.md
-      - 协程 Coroutine: 10_coroutine.md
-      - HTTP/2 协议: 11_http2.md
+      - stage8 - TLS/HTTPS: 10_tls_https.md
+      - stage9 - io_uring 异步 IO: 11_io_uring.md
+      - stage10 - 内存池 + 异步日志: 12_mempool_log.md
+      - stage11 - SO_REUSEPORT 多核: 13_reuseport.md
+      - stage12 - WebSocket 协议: 14_websocket.md
+      - stage13 - 协程 Coroutine: 15_coroutine.md
+      - stage14 - HTTP/2 协议: 16_http2.md
