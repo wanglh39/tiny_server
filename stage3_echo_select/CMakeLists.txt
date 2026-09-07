@@ -1,0 +1,4 @@
+# stage3_echo_select/CMakeLists.txt
+
+add_executable(echo_server_select echo_server_select.c)
+target_link_libraries(echo_server_select common)

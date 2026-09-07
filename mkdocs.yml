@@ -1,0 +1,61 @@
+site_name: tiny_server 教学文档
+site_description: 用纯 C 从零理解计算机网络底层原理
+site_url: https://wanglh39.github.io/tiny_server/
+repo_url: https://github.com/wanglh39/tiny_server
+repo_name: wanglh39/tiny_server
+
+theme:
+  name: material
+  language: zh
+  font:
+    text: Noto Sans SC
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: 切换暗色模式
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: 切换亮色模式
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.mark
+  - pymdownx.keys
+  - attr_list
+  - def_list
+  - footnotes
+
+nav:
+  - 首页: index.md
+  - 前置知识:
+      - 字节序与结构体对齐: 00_byte_order.md
+  - 教学阶段:
+      - stage0 - raw socket 抓包: 01_raw_sniff.md
+      - stage1-4 - IO 模型演进: 02_echo_evolution.md
+      - stage5-7 - HTTP 与 Web 服务器: 03_http_and_webserver.md
+  - 聚合版服务器:
+      - 架构与使用: 04_server.md

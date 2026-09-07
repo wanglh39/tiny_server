@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>tiny_server</title>
+    <style>
+        body { font-family: monospace; max-width: 800px; margin: 40px auto; }
+        h1 { color: #333; }
+        table { border-collapse: collapse; width: 100%; }
+        td { border: 1px solid #ddd; padding: 8px; }
+        a { color: #0066cc; }
+    </style>
+</head>
+<body>
+    <h1>Hello from tiny_server!</h1>
+    <p>这是一个用纯 C 手写的 Web 服务器。</p>
+
+    <h2>教学阶段</h2>
+    <table>
+        <tr><td>stage0</td><td>raw socket 抓包</td></tr>
+        <tr><td>stage1</td><td>阻塞 echo server</td></tr>
+        <tr><td>stage2</td><td>多进程 echo server</td></tr>
+        <tr><td>stage3</td><td>select 多路复用</td></tr>
+        <tr><td>stage4</td><td>epoll LT/ET</td></tr>
+        <tr><td>stage5</td><td>HTTP 状态机解析</td></tr>
+        <tr><td>stage6</td><td>主从 Reactor</td></tr>
+        <tr><td>stage7</td><td>完整 Web 服务器</td></tr>
+    </table>
+
+    <h2>测试链接</h2>
+    <ul>
+        <li><a href="/">首页（静态文件）</a></li>
+        <li><a href="/api/test">API 动态请求</a></li>
+        <li><a href="/test.txt">文本文件</a></li>
+    </ul>
+</body>
+</html>
