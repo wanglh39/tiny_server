@@ -2,10 +2,11 @@
 
 教学项目。在 WSL2 + Linux 下用纯 C 手写一个 Web 服务器，从 raw socket 抓包开始，逐步演进到 epoll + Reactor + HTTP/2 + 协程。
 
-项目分两个阶段，共 15 个 stage，每个 stage 有独立文档（1000+ 行）：
+项目分两个阶段，共 15 个 stage + 2 个聚合版服务器，每个 stage 有独立文档（1000+ 行）：
 
 - **phase1（基础）**：IO 模型演进 + HTTP 解析 + Reactor + 完整 Web 服务器（stage0-7）
 - **phase2（进阶）**：TLS + io_uring + 内存池 + WebSocket + 协程 + HTTP/2（stage8-14）
+- **聚合版**：phase1/server/ 和 phase2/server/，整合各阶段全部特性
 
 ## 目录结构
 
@@ -33,6 +34,7 @@ tiny_server/
 │   ├── stage12_websocket/     # WebSocket
 │   ├── stage13_coroutine/     # 协程（ucontext）
 │   ├── stage14_http2/         # HTTP/2
+│   ├── server/                # 聚合版高级服务器（7 特性整合）
 │   ├── common/                # 公共模块（复用 phase1）
 │   └── docs/                  # 教学文档（每 stage 独立，1000+ 行）
 ├── mkdocs.yml                 # 文档站配置
@@ -63,6 +65,13 @@ tiny_server/
 | 12 | stage12_websocket | WebSocket 协议 | ws_server | 14_websocket.md |
 | 13 | stage13_coroutine | 协程（ucontext） | co_demo / co_echo_server | 15_coroutine.md |
 | 14 | stage14_http2 | HTTP/2 协议 | http2_server | 16_http2.md |
+
+### 聚合版服务器
+
+| 服务器 | 目录 | 整合特性 | 可执行文件 | 文档 |
+|--------|------|---------|-----------|------|
+| phase1 聚合版 | phase1/server | epoll + Reactor + HTTP + sendfile | server | 09_server.md |
+| phase2 聚合版 | phase2/server | TLS + io_uring + 内存池 + 异步日志 + SO_REUSEPORT + WebSocket + HTTP/2 | advanced_server | 17_advanced_server.md |
 
 ## 快速开始
 
@@ -95,6 +104,11 @@ build/bin/ws_server 8080                  # stage12: WebSocket
 build/bin/co_demo                         # stage13: 协程演示
 build/bin/co_echo_server 8080             # stage13: 协程 echo 服务器
 build/bin/http2_server 8080               # stage14: HTTP/2 服务器
+
+# 5. 运行聚合版高级服务器
+build/bin/advanced_server -p 8443 -w 4 -r phase2/www \
+    --cert phase2/certs/cert.pem --key phase2/certs/key.pem
+# 支持 HTTP/1.1 + HTTPS + HTTP/2 + WebSocket，一个端口四种协议
 ```
 
 ## 测试命令速查
