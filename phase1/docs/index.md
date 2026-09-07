@@ -48,6 +48,11 @@ build/bin/server -p 8080 -w 4 -r ./www # 聚合版
 
 - [字节序与结构体对齐](00_byte_order.md) —— 前置知识
 - [stage0 - raw socket 抓包](01_raw_sniff.md) —— IP/TCP 头部、三次握手
-- [stage1-4 - IO 模型演进](02_echo_evolution.md) —— 阻塞→fork→select→epoll
-- [stage5-7 - HTTP 与 Web 服务器](03_http_and_webserver.md) —— 状态机、Reactor、sendfile
-- [聚合版服务器](04_server.md) —— 完整架构与使用
+- [stage1 - 阻塞 echo server](02_echo_blocking.md) —— socket API、fd、listen backlog
+- [stage2 - 多进程并发](03_echo_fork.md) —— fork、fd 引用计数、TIME_WAIT、SIGCHLD
+- [stage3 - select 多路复用](04_echo_select.md) —— FD_SETSIZE、O(n) 遍历
+- [stage4 - epoll LT/ET](05_echo_epoll.md) —— 就绪队列、水平触发 vs 边沿触发
+- [stage5 - HTTP 状态机解析](06_http_parser.md) —— 粘包、状态机、keep-alive
+- [stage6 - 主从 Reactor](07_reactor.md) —— 线程池、惊群、eventfd
+- [stage7 - 完整 Web 服务器](08_webserver.md) —— 路由、sendfile、mmap、异步日志
+- [聚合版服务器](09_server.md) —— 完整架构与使用

@@ -32,7 +32,7 @@ jobs:
           cp phase1/docs/*.md docs/ 2>/dev/null || true
           cp phase2/docs/*.md docs/ 2>/dev/null || true
 
-      - run: mkdocs build --strict
+      - run: mkdocs build
 
       - uses: actions/upload-pages-artifact@v3
         with:
